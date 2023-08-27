@@ -927,6 +927,7 @@ MonoBehaviour:
   - {fileID: 4459090633378654810, guid: 68811a4e5c4257a42bce3cf2ddb41422, type: 3}
   - {fileID: 4459090633378654810, guid: 89c318b4e074c894fb87e58e8735de61, type: 3}
   - {fileID: 4459090633378654810, guid: fafbc619f97c5d149bf4a1dfc1739a3d, type: 3}
+  _npcChar: {fileID: 2932371586765122208, guid: 9fa87c2d4f397e54b95eb8812dae2419, type: 3}
   npcSpawnPos: {fileID: 1518156014}
   spawnPos: {fileID: 470719009}
   characterDropdown: {fileID: 1436538767}

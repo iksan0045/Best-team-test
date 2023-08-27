@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameplayTest
 {
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour,IInteractable
     {
         private Transform playerTransform;
         public Rigidbody2D rb;
@@ -23,8 +23,24 @@ namespace GameplayTest
             }
         }
 
+        public void FacePlayer(Vector3 playerPos,Vector3 npcPos)
+        {
+            FaceDirPlayer(playerPos,npcPos);
+        }
 
-        public void FaceDirPlayer(Vector3 playerPos, Vector3 npcPos)
+        public void JumpInteract(float jumpForce)
+        {
+            Jump(jumpForce);
+        }
+
+        public void RunAwayInteract(Vector3 playerPos,Vector3 npcPos,float speed)
+        {
+            RunAway(playerPos,npcPos,speed);
+        }
+        //Method diatas warisan dari Iinteractable
+
+
+        private void FaceDirPlayer(Vector3 playerPos, Vector3 npcPos)
         {
             if (playerPos.x > 0)
             {
@@ -37,12 +53,12 @@ namespace GameplayTest
 
         }
 
-        public void Jump(float jumpForce)
+        private void Jump(float jumpForce)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        public void RunAway(Vector3 playerPos, Vector3 npcPos, float speed)
+        private void RunAway(Vector3 playerPos, Vector3 npcPos, float speed)
         {
             Vector3 runDirection = (npcPos - playerPos).normalized;
 

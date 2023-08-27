@@ -11,7 +11,8 @@ namespace GameplayTest
         [SerializeField]
         private GameObject[] playerPrefab;
 
-        
+        [SerializeField]
+        private GameObject _npcChar;
 
         [SerializeField]
         private Transform npcSpawnPos;
@@ -47,7 +48,7 @@ namespace GameplayTest
             if (characterController != null)
             {
                 int randomNpc = UnityEngine.Random.Range(1,playerPrefab.Length);
-                Instantiate(playerPrefab[randomNpc], npcSpawnPos.position, Quaternion.identity);
+                Instantiate(_npcChar, npcSpawnPos.position, Quaternion.identity);
             
             }
         }

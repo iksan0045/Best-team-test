@@ -24,29 +24,11 @@ namespace GameplayTest
             IInteractable interactable = other.GetComponent<IInteractable>();
             if (interactable != null && _characterController.isPlayer)
             {
-                //Vector3 directrionPos = transform.position - other.transform.position;
-                //directrionPos.Normalize();
-                //direction = directrionPos.x;
-                interactable.Interact(transform.position, behaviourValue);
-                Debug.Log("Call interactable");
+                //Panggil interaksi dengan npc secara spesifik
+                interactable.FacePlayer(transform.position, other.transform.position);
             }
         }
 
-        public void Interact(Vector3 sourcePos, int id)
-        {
-            Debug.Log("Interact from" + gameObject.name);
-            if (id == 1)
-            {
-                base.FaceDirPlayer(sourcePos, transform.position);
-            }
-            else if (id == 2)
-            {
-                base.Jump(3.5f);
-            }
-            else if (id == 3)
-            {
-                base.RunAway(sourcePos, transform.position, 3.4f);
-            }
-        }
+       
     }
 }
