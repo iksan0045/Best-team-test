@@ -2,17 +2,17 @@ using UnityEngine;
 
 namespace GameplayTest
 {
-    public class Character : MonoBehaviour, Interactable
+    public class Character : MonoBehaviour
     {
         private Transform playerTransform;
-        private Rigidbody2D rb;
+        public Rigidbody2D rb;
         private float initialScaleX;
 
         private void Start()
         {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             rb = GetComponent<Rigidbody2D>();
             initialScaleX = transform.localScale.x;
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
         private void Update()
@@ -23,51 +23,30 @@ namespace GameplayTest
             }
         }
 
-        public void Interact(bool facePlayer, float jumpForce, float speed)
+
+        public void FaceDirPlayer(Vector3 playerPos, Vector3 npcPos)
         {
-            Debug.Log("Interact " + gameObject.name);
-            if (facePlayer)
+            if (playerPos.x > 0)
             {
-                FaceDirPlayer();
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
 
-            if (jumpForce > 0)
-            {
-                Jump(jumpForce);
-            }
-
-            if (speed > 0)
-            {
-                RunAway(speed);
-            }
         }
 
-        private void FaceDirPlayer()
-        {
-            if (playerTransform != null)
-            {
-                Vector3 directionToPlayer = playerTransform.position - transform.position;
-                directionToPlayer.Normalize();
-                float newScaleX = initialScaleX * Mathf.Sign(directionToPlayer.x);
-                transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
-            }
-        }
-
-        private void Jump(float jumpForce)
+        public void Jump(float jumpForce)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        private void RunAway(float speed)
+        public void RunAway(Vector3 playerPos, Vector3 npcPos, float speed)
         {
-            if (playerTransform != null)
-            {
-                Vector3 directionToPlayer = playerTransform.position - transform.position;
-                directionToPlayer.Normalize();
-                rb.velocity = new Vector2(-directionToPlayer.x * speed, rb.velocity.y);
-                float newScaleX = initialScaleX * Mathf.Sign(directionToPlayer.x);
-                transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
-            }
+            Vector3 runDirection = (npcPos - playerPos).normalized;
+
+            rb.velocity = new Vector2(runDirection.x * speed, rb.velocity.y);
         }
     }
 }

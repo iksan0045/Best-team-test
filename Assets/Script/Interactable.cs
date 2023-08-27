@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace GameplayTest
 {
-    public interface Interactable
+    public interface IInteractable
     {
-        void Interact(bool facePlayer,float jumpForce,float run);
+        void Interact(Vector3 pos,int id);
     }
 }

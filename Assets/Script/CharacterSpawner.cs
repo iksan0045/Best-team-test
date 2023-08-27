@@ -9,10 +9,9 @@ namespace GameplayTest
     public class CharacterSpawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject playerPrefab;
+        private GameObject[] playerPrefab;
 
-        [SerializeField]
-        private GameObject npcPrefab;
+        
 
         [SerializeField]
         private Transform npcSpawnPos;
@@ -39,16 +38,17 @@ namespace GameplayTest
         public void SpawnCharacter()
         {
             // Buat karakter baru dari prefab.
-            GameObject newCharacter = Instantiate(playerPrefab, spawnPos.position, Quaternion.identity);
             int characterID = characterDropdown.value;
+            GameObject newCharacter = Instantiate(playerPrefab[characterID], spawnPos.position, Quaternion.identity);
+            
             // Set ID karakter pada objek karakter yang baru di-spawn.
             CharacterPlayer characterController = newCharacter.GetComponent<CharacterPlayer>();
+            characterController.SetAsPlayer();
             if (characterController != null)
             {
-                characterController.SetCharacterId(characterID);
-
-                Instantiate(npcPrefab, npcSpawnPos.position, Quaternion.identity);
-
+                int randomNpc = UnityEngine.Random.Range(1,playerPrefab.Length);
+                Instantiate(playerPrefab[randomNpc], npcSpawnPos.position, Quaternion.identity);
+            
             }
         }
 
