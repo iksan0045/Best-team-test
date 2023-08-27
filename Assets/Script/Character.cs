@@ -23,24 +23,25 @@ namespace GameplayTest
             }
         }
 
-        public void FacePlayer(Vector3 playerPos,Vector3 npcPos)
+        public void Interact(Vector3 playerPos,bool facePlayer,bool runAway, float jumpForce)
         {
-            FaceDirPlayer(playerPos,npcPos);
-        }
-
-        public void JumpInteract(float jumpForce)
-        {
-            Jump(jumpForce);
-        }
-
-        public void RunAwayInteract(Vector3 playerPos,Vector3 npcPos,float speed)
-        {
-            RunAway(playerPos,npcPos,speed);
+            if (facePlayer)
+            {
+                FaceDirPlayer(playerPos);
+            }
+            else if (jumpForce > 0)
+            {
+                Jump(jumpForce);
+            }
+            else if (runAway)
+            {
+                RunAway(playerPos,transform.position);
+            }
         }
         //Method diatas warisan dari Iinteractable
 
 
-        private void FaceDirPlayer(Vector3 playerPos, Vector3 npcPos)
+        private void FaceDirPlayer(Vector3 playerPos)
         {
             if (playerPos.x > 0)
             {
@@ -58,11 +59,11 @@ namespace GameplayTest
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        private void RunAway(Vector3 playerPos, Vector3 npcPos, float speed)
+        private void RunAway(Vector3 playerPos, Vector3 npcPos)
         {
             Vector3 runDirection = (npcPos - playerPos).normalized;
 
-            rb.velocity = new Vector2(runDirection.x * speed, rb.velocity.y);
+            rb.velocity = new Vector2(runDirection.x * 3.2f, rb.velocity.y);
         }
     }
 }

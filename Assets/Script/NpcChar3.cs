@@ -24,8 +24,9 @@ namespace GameplayTest
             IInteractable interactable = other.GetComponent<IInteractable>();
             if (interactable != null && _characterController.isPlayer)
             {
-                //Panggil interaksi dengan npc secara spesifik
-                interactable.FacePlayer(transform.position, other.transform.position);
+                //Panggil interaksi dengan npc secara spesifik sesuai char dan interaksi yang diberikan
+                //bisa ditambahkan variabel baru sesuai 
+                interactable.Interact(transform.position,true,false,0);
             }
         }
 

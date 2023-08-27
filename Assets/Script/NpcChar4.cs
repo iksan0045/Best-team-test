@@ -22,7 +22,7 @@ namespace GameplayTest
             IInteractable interactable = other.GetComponent<IInteractable>();
             if (interactable != null && _characterController.isPlayer)
             {
-                interactable.JumpInteract(3.2f);
+                interactable.Interact(transform.position,false,false,3.2f);
                 //Panggil interaksi dengan npc secara spesifik
             }
         }

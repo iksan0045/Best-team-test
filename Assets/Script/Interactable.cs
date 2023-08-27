@@ -7,8 +7,6 @@ namespace GameplayTest
 {
     public interface IInteractable
     {
-        void FacePlayer(Vector3 playerPos, Vector3 npcPos);
-        void JumpInteract (float jumpForce);
-        void RunAwayInteract(Vector3 playerPos,Vector3 npcPos,float speed);
+        void Interact(Vector3 playerPos,bool facePlayer,bool runAway, float jumpForce);
     }
 }

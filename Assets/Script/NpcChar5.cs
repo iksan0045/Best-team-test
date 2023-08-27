@@ -23,7 +23,7 @@ namespace GameplayTest
             if (interactable != null && _characterController.isPlayer)
             {
                 //Panggil interaksi dengan npc secara spesifik
-                interactable.RunAwayInteract(transform.position,other.transform.position,3.2f);
+                interactable.Interact(transform.position,false,true,0);
             }
         }
     }
