@@ -11,6 +11,7 @@ namespace GameplayTest
         private int behaviourValue;
 
         private CharacterPlayer _characterController;
+        private Vector3 playerPos;
 
         private void Start()
         {
@@ -26,8 +27,13 @@ namespace GameplayTest
             {
                 //Panggil interaksi dengan npc secara spesifik sesuai char dan interaksi yang diberikan
                 //bisa ditambahkan variabel baru sesuai 
-                interactable.Interact(transform.position,true,false,0);
+                playerPos = other.transform.position;
             }
+        }
+
+        public void Interact()
+        {
+            base.FaceDirPlayer(playerPos);
         }
 
        

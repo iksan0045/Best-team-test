@@ -12,7 +12,7 @@ namespace GameplayTest
         private GameObject[] playerPrefab;
 
         [SerializeField]
-        private GameObject _npcChar;
+        private GameObject[] _npcChar;
 
         [SerializeField]
         private Transform npcSpawnPos;
@@ -38,19 +38,30 @@ namespace GameplayTest
 
         public void SpawnCharacter()
         {
-            // Buat karakter baru dari prefab.
+
             int characterID = characterDropdown.value;
-            GameObject newCharacter = Instantiate(playerPrefab[characterID], spawnPos.position, Quaternion.identity);
-            
-            // Set ID karakter pada objek karakter yang baru di-spawn.
-            CharacterPlayer characterController = newCharacter.GetComponent<CharacterPlayer>();
-            characterController.SetAsPlayer();
-            if (characterController != null)
+            if (characterID >= 1)
             {
-                int randomNpc = UnityEngine.Random.Range(1,playerPrefab.Length);
-                Instantiate(_npcChar, npcSpawnPos.position, Quaternion.identity);
-            
+                GameObject newCharacter = Instantiate(playerPrefab[1], spawnPos.position, Quaternion.identity);
+                CharacterPlayer characterController = newCharacter.GetComponent<CharacterPlayer>();
+                characterController.SetAsPlayer();
+                if (characterController != null)
+                {
+                    if (characterID > 1)
+                    {
+                        Instantiate(_npcChar[characterID], npcSpawnPos.position, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(_npcChar[UnityEngine.Random.Range(0,1)], npcSpawnPos.position, Quaternion.identity);
+                    }
+                }
             }
+            else
+            {
+                Instantiate(playerPrefab[0], spawnPos.position, Quaternion.identity);
+            }
+
         }
 
         public void ResetChar()

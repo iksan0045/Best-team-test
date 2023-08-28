@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayTest
 {
-    public class NpcChar1 : Character, IInteractable
+    public class NpcChar1 : Character
     {
         // Start is called before the first frame update
         

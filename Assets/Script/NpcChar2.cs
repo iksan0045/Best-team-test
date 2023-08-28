@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayTest
 {
-    public class NpcChar2 : Character, IInteractable
+    public class NpcChar2 : Character
     {
         // Start is called before the first frame update
         
@@ -19,9 +19,6 @@ namespace GameplayTest
 
         }
 
-        public void  Interact(Vector3 sourcePos,int id)
-        {
-           
-        }
+        
     }
 }

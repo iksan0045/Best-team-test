@@ -68,6 +68,16 @@ namespace GameplayTest
             }
         }
 
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            IInteractable interactable = other.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+            
+        }
+
         public void Move(float moveDir)
         {
             _rb.velocity = new Vector2(moveDir * 2.5f, _rb.velocity.y);

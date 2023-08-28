@@ -9,6 +9,7 @@ namespace GameplayTest
         [SerializeField]
         private int behaviourValue;
         private CharacterPlayer _characterController;
+        private Vector3 _playerPos;
 
         private void Start()
         {
@@ -23,8 +24,13 @@ namespace GameplayTest
             if (interactable != null && _characterController.isPlayer)
             {
                 //Panggil interaksi dengan npc secara spesifik
-                interactable.Interact(transform.position,false,true,0);
+                _playerPos = other.transform.position;
+                
             }
+        }
+        public void Interact()
+        {
+            base.RunAway(_playerPos,transform.position);
         }
     }
 }
